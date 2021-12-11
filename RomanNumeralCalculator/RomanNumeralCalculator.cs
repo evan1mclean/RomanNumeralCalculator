@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RomanNumeralCalculator
 {
-    public class Calculator
+    public class RomanNumeralCalculator
     {
         Dictionary<char, int> RomanValues = new Dictionary<char, int>();
 
@@ -49,9 +49,9 @@ namespace RomanNumeralCalculator
 
         public string IntegerToRomanNumeral(int x)
         {
-            if (x >= 4000)
+            if (x >= 4000 || x == 0)
             {
-                throw new InvalidOperationException("Roman numeral notation cannot exceed 3999");
+                throw new InvalidOperationException("Roman numeral notation cannot exceed 3999 or represent 0");
             }
 
             string romanNumeralValue = "";
@@ -76,6 +76,54 @@ namespace RomanNumeralCalculator
             romanNumeralValue += OnesDigits[x];
 
             return romanNumeralValue;
+        }
+
+        public string RomanNumeralAdd(params int[] numbers)
+        {
+            int total = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                total += numbers[i];
+            }
+
+            if (total >= 4000)
+            {
+                throw new InvalidOperationException("Roman numeral notation cannot exceed 3999");
+            }
+
+            return IntegerToRomanNumeral(total);
+        }
+
+        public string RomanNumeralSubtract(params int[] numbers)
+        {
+            int total = numbers[0];
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                total -= numbers[i];
+            }
+
+            if (total <= 0)
+            {
+                throw new InvalidOperationException("Roman numeral notation cannot represent 0 or negative numbers");
+            }
+
+            return IntegerToRomanNumeral(total);
+        }
+
+        public string RomanNumeralMultiply(params int[] numbers)
+        {
+            int total = numbers[0];
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                total *= numbers[i];
+            }
+
+            if (total >= 4000)
+            {
+                throw new InvalidOperationException("Roman numeral notation cannot exceed 3999");
+            }
+
+            return IntegerToRomanNumeral(total);
         }
     }
 }
