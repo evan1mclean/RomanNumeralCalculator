@@ -6,7 +6,8 @@ namespace RomanNumeralCalculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var romanNumeralCalc = new Calculator();
+            Console.WriteLine(romanNumeralCalc.IntegerToRomanNumeral(78));
         }
     }
 }

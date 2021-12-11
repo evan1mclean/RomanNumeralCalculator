@@ -6,9 +6,6 @@ namespace RomanNumeralCalculator
 {
     public class Calculator
     {
-
-        //public string[] OnesDigits = { };
-
         Dictionary<char, int> RomanValues = new Dictionary<char, int>();
 
         public int RomanNumeralToInteger(string RomanNumeral)
@@ -43,6 +40,42 @@ namespace RomanNumeralCalculator
             }
 
             return decimalValue;
+        }
+
+        public string[] OnesDigits = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+        public string[] TensDigits = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+        public string[] HundredsDigits = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+        public string[] ThousandsDigits = { "", "M", "MM", "MMM" };
+
+        public string IntegerToRomanNumeral(int x)
+        {
+            if (x >= 4000)
+            {
+                throw new InvalidOperationException("Roman numeral notation cannot exceed 3999");
+            }
+
+            string romanNumeralValue = "";
+
+            //thousands place
+            int num;
+            num = x / 1000;
+            romanNumeralValue += ThousandsDigits[num];
+            x %= 1000;
+
+            //hundreds place
+            num = x / 100;
+            romanNumeralValue += HundredsDigits[num];
+            x %= 100;
+
+            //tens place
+            num = x / 10;
+            romanNumeralValue += TensDigits[num];
+            x %= 10;
+
+            //ones place
+            romanNumeralValue += OnesDigits[x];
+
+            return romanNumeralValue;
         }
     }
 }
